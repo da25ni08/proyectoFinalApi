@@ -18,7 +18,7 @@ class CreatePublicationsTable extends Migration
             $table->string('img_url')->nullable();
             $table->string('title');
             $table->string('description');
-            $table->foreignId('pub_type_id');
+            $table->foreignId('pub_type_id')->nullable();
             $table->boolean('active');
             $table->timestamps();
         });
