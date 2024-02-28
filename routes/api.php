@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\AuthApiController;
 use App\Http\Controllers\api\PublicationApiController;
 use App\Http\Controllers\PublicationController;
 use Illuminate\Http\Request;
