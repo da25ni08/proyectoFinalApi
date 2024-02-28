@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('user_id');
             $table->string('gender')->nullable();
             $table->date('birth')->nullable();
             $table->boolean('active')->default(true);

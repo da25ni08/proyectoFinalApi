@@ -23,9 +23,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'password' => ['required'],
-            'email' => ['required', 'exists:profesor,correo', 'unique:users,email'],
+            'email' => ['required', 'unique:users,email'],
             'phone' => ['required'],
-            'commerce' => ['required', 'boolean']
+            'empresa' => ['required', 'boolean']
         ];
     }
 }

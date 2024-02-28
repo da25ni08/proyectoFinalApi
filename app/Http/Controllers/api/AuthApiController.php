@@ -7,13 +7,15 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Commerce;
 use App\Models\Customer;
+use App\Models\Publication;
 use App\Models\User;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthApiController extends Controller
 {
-    public function login(LoginRequest $datos)
+    public function login(Request $datos)
     {
         $credenciales = $datos->only('email', 'password');
 
@@ -32,24 +34,26 @@ class AuthApiController extends Controller
     }
 
     public function register(RegisterRequest $datos) {
-        $user = User::create([
-            'name' => $datos->name,
-            'email' => $datos->email,
-            'phone' => $datos->phone,
-            'password' => Hash::make($datos->password)
-        ]);
+        $user = new User();
+        $user->name = $datos->name;
+        $user->email = $datos->email;
+        $user->phone = $datos->phone;
+        $user->password = Hash::make($datos->password);
+        $user->save();
         $credentials = $datos->only('email', 'password');
         Auth::attempt($credentials);
         if($datos->empresa) {
             $user->assignRole('commerce');
             $commerce = Commerce::create([
+                'user_id' => $user->id,
             ]);
-            $commerce->user->attach($user->id);
+            $commerce->user()->associate($user->id);
         }else {
             $user->assignRole('customer');
             $customer = Customer::create([
+                'user_id' => $user->id,
             ]);
-            $customer->user()->attach($user->id);
+            $customer->user()->associate($user->id);
         }
         
         

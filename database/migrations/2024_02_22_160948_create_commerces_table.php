@@ -14,7 +14,7 @@ class CreateCommercesTable extends Migration
     public function up()
     {
         Schema::create('commerces', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('user_id');
             $table->foreignId('category_id')->nullable();
             $table->foreignId('validate_token_id')->nullable();
             $table->string('adress')->nullable();
