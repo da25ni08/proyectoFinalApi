@@ -22,7 +22,10 @@ class UpdatePublicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required'],
+            'description' => ['required'],
+            'pub_type_id' => ['integer'],
+            'active' => ['boolean']
         ];
     }
 }
