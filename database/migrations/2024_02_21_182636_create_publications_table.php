@@ -17,9 +17,9 @@ class CreatePublicationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('img_url')->nullable();
             $table->string('title');
-            $table->string('description');
+            $table->string('description')->default('');
             $table->foreignId('pub_type_id')->nullable();
-            $table->boolean('active');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

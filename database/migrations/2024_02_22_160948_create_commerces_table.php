@@ -14,12 +14,12 @@ class CreateCommercesTable extends Migration
     public function up()
     {
         Schema::create('commerces', function (Blueprint $table) {
-            $table->foreignId('user_id');
-            $table->foreignId('category_id');
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('category_id')->nullable();
             $table->foreignId('validate_token_id')->nullable();
-            $table->string('adress');
-            $table->string('description');
-            $table->boolean('active');
+            $table->string('adress')->nullable();
+            $table->string('description')->default('');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

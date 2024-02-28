@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->foreignId('user_id');
-            $table->string('gender');
-            $table->date('birth');
-            $table->boolean('active');
+            $table->foreignId('user_id')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('birth')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
