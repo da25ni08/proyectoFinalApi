@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Pub_type;
+use App\Models\Publication;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,23 +16,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $pub_type = \App\Models\Pub_type::factory()->create([
-            'name' => 'Prueba Tipo',
-        ]);
+        $pub_type = new Pub_type();
+        $pub_type->name = "prueba";
+        $pub_type->save();
 
-        $publicacion = \App\Models\Publication::factory()->create([
-            'title' => 'Prueba Publicacion',
-            'description' => 'Prueba',
-            'pub_type_id' => '1',
-        ]);
+        $publicacion = new Publication();
+        $publicacion->title = 'Prueba Publicacion';
+        $publicacion->description = 'Prueba';
+        $publicacion->pub_type_id = '1';
+        $publicacion->save();
 
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Prueba User',
-            'email' => 'prueba@gmail.com',
-            'password' => encrypt('1234'),
-            'phone' => '1234',
-        ]);
+        $user = new User();
+        $user->name = 'Prueba User';
+        $user->email = 'prueba@gmail.com';
+        $user->password = encrypt('1234');
+        $user->phone = '1234';
+        $user->save();
 
-        $publicacion->users()->attach($user->id);
+
+        $publicacion->commerces()->attach($user->id);
     }
 }
